@@ -3,91 +3,744 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Client</title>
+    <title>creators.goated - Futuristic Email Client</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
-            color: white;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        header {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 20px;
-            text-align: center;
+
+        body {
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f1629 100%);
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+            overflow: hidden;
         }
-        nav {
-            background: rgba(0, 255, 255, 0.1);
-            padding: 10px;
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
-        }
+
         .container {
             display: flex;
-            justify-content: space-between;
-            padding: 20px;
+            height: 100vh;
         }
+
+        /* Sidebar */
         .sidebar {
-            width: 25%;
+            width: 250px;
+            background: rgba(10, 14, 39, 0.95);
+            border-right: 2px solid #00ffff;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
+            overflow-y: auto;
+            box-shadow: inset -5px 0 20px rgba(0, 255, 255, 0.1);
         }
-        .content {
-            width: 70%;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 10px;
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite;
+            text-shadow: 0 0 10px #00ffff;
         }
-        h1, h2 {
-            color: cyan;
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; }
+            50% { text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff; }
         }
-        button {
-            background-color: cyan;
-            color: black;
-            border: none;
-            padding: 10px;
+
+        .user-info {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #00ffff;
+        }
+
+        .user-email {
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            padding: 12px;
+            margin: 8px 0;
             cursor: pointer;
-            border-radius: 5px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s;
+            border-radius: 4px;
         }
-        button:hover {
-            opacity: 0.8;
+
+        .nav-item:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-left-color: #00ffff;
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 255, 255, 0.3);
+            border-left-color: #00ffff;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, rgba(26, 26, 62, 0.8), rgba(15, 22, 41, 0.9));
+        }
+
+        .header {
+            background: rgba(0, 255, 255, 0.05);
+            border-bottom: 2px solid #00ffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.1);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff006e, #8338ec);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 0, 110, 0.6);
+        }
+
+        /* Content Area */
+        .content {
+            flex: 1;
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Email List */
+        .email-list {
+            flex: 0 0 35%;
+            background: rgba(10, 14, 39, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .email-item {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .email-item:hover {
+            background: rgba(0, 255, 255, 0.15);
+            transform: translateX(5px);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .email-item.active {
+            background: rgba(0, 255, 255, 0.25);
+            border-left: 3px solid #00ffff;
+        }
+
+        .email-from {
+            font-weight: bold;
+            color: #00ffff;
+        }
+
+        .email-subject {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #fff;
+        }
+
+        .email-preview {
+            font-size: 12px;
+            color: #aaa;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Email Viewer */
+        .email-viewer {
+            flex: 1;
+            background: rgba(10, 14, 39, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .email-header {
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .email-from-header {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .email-subject-header {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .email-date {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .email-body {
+            color: #ddd;
+            line-height: 1.6;
+        }
+
+        /* Compose Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #0a0e27, #1a1a3e);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #00ffff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-btn:hover {
+            transform: rotate(90deg);
+            color: #ff006e;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .send-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffff, #0072ff);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .send-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .compose-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffff, #0072ff);
+            border: 1px solid #00ffff;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .compose-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 255, 255, 0.5);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 255, 0.8);
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 50%, #0f1629 100%);
+        }
+
+        .login-box {
+            background: rgba(10, 14, 39, 0.9);
+            border: 2px solid #00ffff;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+        }
+
+        .login-logo {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00ffff, #0072ff);
+            border: none;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
+        }
+
+        .signup-link a {
+            color: #00ffff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #888;
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Futuristic Email Client</h1>
-    </header>
-    <nav>
-        <button>Login</button>
-        <button>Signup</button>
-    </nav>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Navigation</h2>
-            <button>Inbox</button>
-            <button>Compose</button>
-            <button>Settings</button>
-        </div>
-        <div class="content">
-            <h2>Inbox</h2>
-            <div>
-                <h3>Email #1</h3>
-                <p>Subject: Hello World</p>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">📧 creators.goated</div>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="loginEmail" placeholder="username@creators.goated" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="signup-link">
+                Don't have an account? <a onclick="toggleSignup()">Sign up</a>
             </div>
-            <div>
-                <h3>Email #2</h3>
-                <p>Subject: Next Meeting</p>
-            </div>
-            <hr>
-            <h2>Compose Email</h2>
-            <textarea rows="4" cols="50" placeholder="Write your email..."></textarea><br>
-            <button>Send</button>
         </div>
     </div>
+
+    <!-- Sign Up Page -->
+    <div id="signupPage" class="login-container" style="display: none;">
+        <div class="login-box">
+            <div class="login-logo">📧 creators.goated</div>
+            <h2>Create Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="signupUsername" placeholder="Choose a username" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Domain</label>
+                    <input type="text" value="@creators.goated" disabled>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="signupConfirm" placeholder="Confirm password" required>
+                </div>
+                <button type="submit" class="login-btn">Create Account</button>
+            </form>
+            <div class="signup-link">
+                Already have an account? <a onclick="toggleSignup()">Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Email Client -->
+    <div id="mainPage" class="container" style="display: none;">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">📧 creators.goated</div>
+            <div class="user-info">
+                <div id="userEmail" class="user-email">user@creators.goated</div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" onclick="selectFolder('inbox')">📥 Inbox</li>
+                <li class="nav-item" onclick="selectFolder('sent')">📤 Sent</li>
+                <li class="nav-item" onclick="selectFolder('drafts')">📝 Drafts</li>
+                <li class="nav-item" onclick="selectFolder('spam')">⚠️ Spam</li>
+                <li class="nav-item" onclick="selectFolder('trash')">🗑️ Trash</li>
+            </ul>
+            <button class="compose-btn" onclick="openCompose()">✏️ Compose</button>
+            <button class="logout-btn" style="margin-top: 20px; width: 100%;" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1 id="folderName">Inbox</h1>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" placeholder="Search emails..." style="padding: 8px; border-radius: 5px; border: 1px solid #00ffff; background: rgba(0, 255, 255, 0.1); color: #00ffff;">
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content">
+                <!-- Email List -->
+                <div class="email-list" id="emailList">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📧</div>
+                        <div>No emails in this folder</div>
+                    </div>
+                </div>
+
+                <!-- Email Viewer -->
+                <div class="email-viewer" id="emailViewer">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">👈</div>
+                        <div>Select an email to read</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose Modal -->
+    <div id="composeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Compose Email</h2>
+                <button class="close-btn" onclick="closeCompose()">✕</button>
+            </div>
+            <form id="composeForm">
+                <div class="form-group">
+                    <label>To</label>
+                    <input type="email" id="composeTo" placeholder="recipient@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" id="composeSubject" placeholder="Email subject" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="composeBody" placeholder="Write your message here..." required></textarea>
+                </div>
+                <button type="submit" class="send-btn">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let currentFolder = 'inbox';
+        let emails = [];
+
+        // Toggle between login and signup
+        function toggleSignup() {
+            document.getElementById('loginPage').style.display = document.getElementById('loginPage').style.display === 'none' ? 'flex' : 'none';
+            document.getElementById('signupPage').style.display = document.getElementById('signupPage').style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Login handler
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            // Simulate login
+            currentUser = email;
+            document.getElementById('userEmail').textContent = email;
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'flex';
+            loadEmails();
+        });
+
+        // Signup handler
+        document.getElementById('signupForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirm').value;
+
+            if (password !== confirm) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const newEmail = `${username}@creators.goated`;
+            currentUser = newEmail;
+            document.getElementById('userEmail').textContent = newEmail;
+            document.getElementById('signupPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'flex';
+            loadEmails();
+        });
+
+        // Load emails
+        function loadEmails() {
+            // Simulate email loading from backend
+            emails = [
+                {
+                    id: 1,
+                    from: 'admin@creators.goated',
+                    subject: 'Welcome to creators.goated!',
+                    preview: 'Thank you for signing up...',
+                    body: 'Thank you for signing up for creators.goated! We are excited to have you on board. Enjoy the futuristic email experience.',
+                    date: new Date(),
+                    folder: 'inbox'
+                },
+                {
+                    id: 2,
+                    from: 'support@creators.goated',
+                    subject: 'How to use creators.goated',
+                    preview: 'Here is a quick guide...',
+                    body: 'Here is a quick guide on how to use creators.goated. You can send, receive, and manage emails with ease!',
+                    date: new Date(),
+                    folder: 'inbox'
+                }
+            ];
+            displayEmails();
+        }
+
+        // Display emails
+        function displayEmails() {
+            const emailListDiv = document.getElementById('emailList');
+            const folderEmails = emails.filter(e => e.folder === currentFolder);
+
+            if (folderEmails.length === 0) {
+                emailListDiv.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📧</div><div>No emails in this folder</div></div>';
+                return;
+            }
+
+            emailListDiv.innerHTML = folderEmails.map(email => `
+                <div class="email-item" onclick="selectEmail(${email.id})">
+                    <div class="email-from">${email.from}</div>
+                    <div class="email-subject">${email.subject}</div>
+                    <div class="email-preview">${email.preview}</div>
+                </div>
+            `).join('');
+        }
+
+        // Select email
+        function selectEmail(emailId) {
+            const email = emails.find(e => e.id === emailId);
+            if (!email) return;
+
+            const emailViewerDiv = document.getElementById('emailViewer');
+            emailViewerDiv.innerHTML = `
+                <div class="email-header">
+                    <div class="email-from-header">From: ${email.from}</div>
+                    <div class="email-subject-header">${email.subject}</div>
+                    <div class="email-date">${email.date.toLocaleString()}</div>
+                </div>
+                <div class="email-body">${email.body}</div>
+            `;
+
+            // Update active email item
+            document.querySelectorAll('.email-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.email-item').classList.add('active');
+        }
+
+        // Select folder
+        function selectFolder(folder) {
+            currentFolder = folder;
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            document.getElementById('folderName').textContent = folder.charAt(0).toUpperCase() + folder.slice(1);
+            displayEmails();
+        }
+
+        // Open compose modal
+        function openCompose() {
+            document.getElementById('composeModal').classList.add('active');
+        }
+
+        // Close compose modal
+        function closeCompose() {
+            document.getElementById('composeModal').classList.remove('active');
+            document.getElementById('composeForm').reset();
+        }
+
+        // Send email
+        document.getElementById('composeForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const to = document.getElementById('composeTo').value;
+            const subject = document.getElementById('composeSubject').value;
+            const body = document.getElementById('composeBody').value;
+
+            // Simulate sending email
+            emails.push({
+                id: emails.length + 1,
+                from: currentUser,
+                subject: subject,
+                preview: body.substring(0, 50) + '...',
+                body: body,
+                date: new Date(),
+                folder: 'sent'
+            });
+
+            alert('Email sent to ' + to);
+            closeCompose();
+        });
+
+        // Logout
+        function logout() {
+            currentUser = null;
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('loginForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = (event) => {
+            const modal = document.getElementById('composeModal');
+            if (event.target === modal) {
+                closeCompose();
+            }
+        }
+    </script>
 </body>
 </html>
