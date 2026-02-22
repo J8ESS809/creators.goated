@@ -1,0 +1,1 @@
+{\n  "name": "email-server",\n  "version": "1.0.0",\n  "description": "A simple Node.js email server.",\n  "main": "index.js",\n  "scripts": {\n    "start": "node index.js"\n  },\n  "dependencies": {\n    "express": "^4.18.2",\n    "imap": "^0.8.19",\n    "nodemailer": "^6.9.1",\n    "sqlite3": "^5.0.11"\n  },\n  "author": "J8ESS809",\n  "license": "ISC"\n}
