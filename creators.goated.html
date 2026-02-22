@@ -1,64 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic Email Program UI</title>
+    <title>Email Application</title>
     <style>
-        body {
-            background: #1a1a1a;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            width: 80%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(15px);
-            padding: 20px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s;
-        }
-        .container:hover {
-            transform: scale(1.02);
-        }
-        h1 {
-            color: #00ffcc;
-            text-align: center;
-            animation: glow 1.5s infinite;
-        }
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #00ffcc; }
-            50% { text-shadow: 0 0 20px #00ffcc; }
-            100% { text-shadow: 0 0 5px #00ffcc; }
-        }
-        button {
-            background: linear-gradient(145deg, #0e0e0e, #1a1a1a);
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            color: #00ffcc;
-            font-size: 16px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: linear-gradient(145deg, #1a1a1a, #0e0e0e);
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f4; }
+        h1 { color: #333; }
+        .email-container { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .email-item { border-bottom: 1px solid #ddd; padding: 10px 0; }
+        .compose { margin-top: 20px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to the Futuristic Email Program</h1>
-        <p>Experience the future of communication with our sleek UI and modern animations!</p>
-        <button>Get Started</button>
+    <div class="email-container">
+        <h1>Email Application</h1>
+        <div id="inbox" class="inbox">
+            <h2>Inbox</h2>
+            <div class="email-item"><strong>From:</strong> user1@creators.goated <strong>Subject:</strong> Welcome!</div>
+            <div class="email-item"><strong>From:</strong> user2@creators.goated <strong>Subject:</strong> Meeting Reminder</div>
+            <!-- More emails would be dynamically loaded here -->
+        </div>
+        <div class="compose">
+            <h2>Compose Email</h2>
+            <input type="text" id="to" placeholder="To: username@creators.goated" style="width: 100%; padding: 10px; margin: 10px 0;" />
+            <input type="text" id="subject" placeholder="Subject" style="width: 100%; padding: 10px; margin: 10px 0;" />
+            <textarea id="message" rows="5" placeholder="Message" style="width: 100%; padding: 10px; margin: 10px 0;"></textarea>
+            <button id="sendButton" style="padding: 10px 20px;">Send</button>
+        </div>
     </div>
+    <script>
+        // Function to load emails
+        function loadEmails() {
+            // Here you would normally use an AJAX call to your backend to fetch emails using IMAP
+            console.log('Loading emails from IMAP...');
+        }
+
+        // Function to send email
+        document.getElementById('sendButton').addEventListener('click', function() {
+            const to = document.getElementById('to').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+
+            // Here you would normally send an email using SMTP
+            console.log(`Sending email to ${to} with subject '${subject}'`);
+        });
+
+        loadEmails();
+    </script>
 </body>
 </html>
