@@ -7,78 +7,86 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6));
+            color: white;
+            margin: 0;
+        }
+        header {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-        h1 {
             text-align: center;
         }
-        .nav {
+        nav {
+            background: rgba(0, 255, 255, 0.1);
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+        }
+        .container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
+            padding: 20px;
         }
-        .nav a {
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
+        .sidebar {
+            width: 25%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
         }
-        .inbox, .compose, .contacts, .folders {
-            display: none;
+        .content {
+            width: 70%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
         }
-        .active {
-            display: block;
+        h1, h2 {
+            color: cyan;
+        }
+        button {
+            background-color: cyan;
+            color: black;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            opacity: 0.8;
         }
     </style>
-    <script>
-        function showSection(section) {
-            document.querySelectorAll('.inbox, .compose, .contacts, .folders').forEach(el => el.classList.remove('active'));
-            document.querySelector(section).classList.add('active');
-        }
-    </script>
 </head>
 <body>
+    <header>
+        <h1>Futuristic Email Client</h1>
+    </header>
+    <nav>
+        <button>Login</button>
+        <button>Signup</button>
+    </nav>
     <div class="container">
-        <h1>Advanced Email Client</h1>
-        <div class="nav">
-            <a href="#" onclick="showSection('.inbox')">Inbox</a>
-            <a href="#" onclick="showSection('.compose')">Compose</a>
-            <a href="#" onclick="showSection('.contacts')">Contacts</a>
-            <a href="#" onclick="showSection('.folders')">Folders</a>
+        <div class="sidebar">
+            <h2>Navigation</h2>
+            <button>Inbox</button>
+            <button>Compose</button>
+            <button>Settings</button>
         </div>
-        <div class="inbox active">
+        <div class="content">
             <h2>Inbox</h2>
-            <p>No new messages.</p>
-        </div>
-        <div class="compose">
+            <div>
+                <h3>Email #1</h3>
+                <p>Subject: Hello World</p>
+            </div>
+            <div>
+                <h3>Email #2</h3>
+                <p>Subject: Next Meeting</p>
+            </div>
+            <hr>
             <h2>Compose Email</h2>
-            <form>
-                <label for="to">To:</label><br>
-                <input type="email" id="to" name="to"><br>
-                <label for="subject">Subject:</label><br>
-                <input type="text" id="subject" name="subject"><br><br>
-                <label for="body">Body:</label><br>
-                <textarea id="body" name="body" rows="5"></textarea><br><br>
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        <div class="contacts">
-            <h2>Contacts</h2>
-            <p>No contacts available.</p>
-        </div>
-        <div class="folders">
-            <h2>Folders</h2>
-            <p>No folders available.</p>
+            <textarea rows="4" cols="50" placeholder="Write your email..."></textarea><br>
+            <button>Send</button>
         </div>
     </div>
 </body>
