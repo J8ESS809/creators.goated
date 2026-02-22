@@ -1,1 +1,76 @@
-<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>Email Client</title>\n    <link rel="stylesheet" href="styles.css">\n</head>\n<body>\n    <div class="container">\n        <header class="header">\n            <h1>Email Client</h1>\n            <nav>\n                <a href="#">Login</a>\n                <a href="#">Signup</a>\n                <a href="#">Inbox</a>\n                <a href="#">Compose</a>\n            </nav>\n        </header>\n        <main>\n            <section id="login">\n                <h2>Login</h2>\n                <form>\n                    <input type="text" placeholder="Email" required>\n                    <input type="password" placeholder="Password" required>\n                    <button type="submit">Login</button>\n                </form>\n            </section>\n            <section id="signup">\n                <h2>Signup</h2>\n                <form>\n                    <input type="text" placeholder="Full Name" required>\n                    <input type="text" placeholder="Email" required>\n                    <input type="password" placeholder="Password" required>\n                    <button type="submit">Signup</button>\n                </form>\n            </section>\n            <section id="inbox">\n                <h2>Inbox</h2>\n                <ul class="email-list">\n                    <li class="email-item">\n                        <h3>Email Subject</h3>\n                        <p>Preview of the email content...</p>\n                    </li>\n                </ul>\n            </section>\n            <section id="compose">\n                <h2>Compose Email</h2>\n                <form>\n                    <input type="text" placeholder="To:" required>\n                    <input type="text" placeholder="Subject:" required>\n                    <textarea placeholder="Email body..." required></textarea>\n                    <button type="submit">Send</button>\n                </form>\n            </section>\n            <section id="email-view">\n                <h2>Email View</h2>\n                <h3>Email Subject</h3>\n                <p>Full email content goes here...</p>\n            </section>\n        </main>\n    </div>\n    <script src="scripts.js"></script>\n</body>\n</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Email Client</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">CyberMail</h1>
+        <nav>
+            <ul>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#signup">Signup</a></li>
+                <li><a href="#inbox">Inbox</a></li>
+                <li><a href="#compose">Compose</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="login" class="form-section">
+            <h2>Login</h2>
+            <form>
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <button type="submit">Login</button>
+            </form>
+        </section>
+        <section id="signup" class="form-section">
+            <h2>Signup</h2>
+            <form>
+                <input type="text" placeholder="Full Name" required />
+                <input type="email" placeholder="Email" required />
+                <input type="password" placeholder="Password" required />
+                <button type="submit">Signup</button>
+            </form>
+        </section>
+        <section id="compose" class="form-section">
+            <h2>Compose Email</h2>
+            <form>
+                <input type="email" placeholder="To" required />
+                <input type="text" placeholder="Subject" required />
+                <textarea placeholder="Compose your email here..." required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+        <section id="inbox" class="form-section">
+            <h2>Inbox</h2>
+            <ul class="email-list">
+                <li class="email-item">
+                    <span class="sender">Sender 1</span>
+                    <span class="subject">Subject of Email</span>
+                    <span class="timestamp">2026-02-22</span>
+                </li>
+                <li class="email-item">
+                    <span class="sender">Sender 2</span>
+                    <span class="subject">Another Email</span>
+                    <span class="timestamp">2026-02-21</span>
+                </li>
+                <!-- More emails -->
+            </ul>
+        </section>
+        <section id="email-view" class="form-section">
+            <h2>Email View</h2>
+            <div class="email-content">
+                <p>Here will be the content of the selected email.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2026 CyberMail. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
