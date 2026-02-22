@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Client</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+        }
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        .inbox, .compose, .contacts, .folders {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+    </style>
+    <script>
+        function showSection(section) {
+            document.querySelectorAll('.inbox, .compose, .contacts, .folders').forEach(el => el.classList.remove('active'));
+            document.querySelector(section).classList.add('active');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Advanced Email Client</h1>
+        <div class="nav">
+            <a href="#" onclick="showSection('.inbox')">Inbox</a>
+            <a href="#" onclick="showSection('.compose')">Compose</a>
+            <a href="#" onclick="showSection('.contacts')">Contacts</a>
+            <a href="#" onclick="showSection('.folders')">Folders</a>
+        </div>
+        <div class="inbox active">
+            <h2>Inbox</h2>
+            <p>No new messages.</p>
+        </div>
+        <div class="compose">
+            <h2>Compose Email</h2>
+            <form>
+                <label for="to">To:</label><br>
+                <input type="email" id="to" name="to"><br>
+                <label for="subject">Subject:</label><br>
+                <input type="text" id="subject" name="subject"><br><br>
+                <label for="body">Body:</label><br>
+                <textarea id="body" name="body" rows="5"></textarea><br><br>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <div class="contacts">
+            <h2>Contacts</h2>
+            <p>No contacts available.</p>
+        </div>
+        <div class="folders">
+            <h2>Folders</h2>
+            <p>No folders available.</p>
+        </div>
+    </div>
+</body>
+</html>
